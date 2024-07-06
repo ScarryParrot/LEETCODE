@@ -1,17 +1,15 @@
 class Solution:
     def countVowelSubstrings(self, word: str) -> int:
-        vowels = {'a', 'e', 'i', 'o', 'u'}
-        count = 0
-        
+        v={'a','e','i','o','u'}
+        c=0
         for i in range(len(word)):
-            if word[i] in vowels:
-                vowel_set = set()
-                for j in range(i, len(word)):
-                    if word[j] in vowels:
-                        vowel_set.add(word[j])
-                        if len(vowel_set) == 5:
-                            count += 1
+            if word[i] in v:
+                v_set=set()
+                for j in range(i,len(word)):
+                    if word[j] in v:
+                        v_set.add(word[j])
+                        if len(v_set) == 5:
+                            c+=1
                     else:
-                        break
-                        
-        return count
+                            break
+        return c
