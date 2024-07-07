@@ -6,25 +6,20 @@ class Solution:
         prod = 1
         zero_count = 0
         
-        # Calculate the product of all non-zero elements and count zeros
         for num in nums:
-            if num != 0:
-                prod *= num
+            if num==0:
+                zero_count+=1
             else:
-                zero_count += 1
-        
-        # If more than one zero, all products will be zero
-        if zero_count > 1:
-            return [0] * n
-        
-        arr = []
+                prod*=num
+        arr=[]
+        if zero_count >1:
+            return [0]*n
         for num in nums:
-            if zero_count == 0:
-                arr.append(prod // num)
+            if zero_count==0:
+                arr.append(prod//num)
             else:
-                if num == 0:
+                if num ==0:
                     arr.append(prod)
                 else:
                     arr.append(0)
-        
         return arr
