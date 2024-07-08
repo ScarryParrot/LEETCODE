@@ -1,28 +1,35 @@
 # Python3
-# Better Solution
-from collections import defaultdict
+# Optimal Solution
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         n = len(nums)
-        ans = set()
-        hmap = defaultdict(int)
-        for i in nums:
-            hmap[i] += 1
-        
-        for i in range(n-3):
-            hmap[nums[i]] -= 1
-            for j in range(i+1, n-2):
-                hmap[nums[j]] -= 1
-                for k in range(j+1, n-1):
-                    hmap[nums[k]] -= 1
-                    rem = target-(nums[i] + nums[j] + nums[k])
-                    if rem in hmap and hmap[rem] > 0:
-                        ans.add(tuple(sorted((nums[i], nums[j], nums[k], rem))))
-                    hmap[nums[k]] += 1
-                hmap[nums[j]] += 1
-            hmap[nums[i]] += 1
-        
+        nums.sort()
         res = []
-        for i in ans:
-            res += list(i),
+
+        for i in range(n-3):
+            # avoid the duplicates while moving i
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            for j in range(i+1, n-2):
+                # avoid the duplicates while moving j
+                if j > i + 1 and nums[j] == nums[j - 1]:
+                    continue
+                lo = j + 1
+                hi = n - 1
+                while lo < hi:
+                    temp = nums[i] + nums[j] + nums[lo] + nums[hi]
+                    if temp == target:
+                        res += [nums[i], nums[j], nums[lo], nums[hi]],
+
+                        # skip duplicates
+                        while lo < hi and nums[lo] == nums[lo + 1]:
+                            lo += 1
+                        lo += 1
+                        while lo < hi and nums[hi] == nums[hi - 1]:
+                            hi -= 1
+                        hi -= 1
+                    elif temp < target:
+                        lo += 1
+                    else:
+                        hi -= 1
         return res
