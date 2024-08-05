@@ -17,5 +17,5 @@ class Solution:
         curr=sorted_head
         for i in ele[1:]:
             curr.next=new_node=ListNode(i)
-            curr=new_node
+            curr=curr.next
         return sorted_head
