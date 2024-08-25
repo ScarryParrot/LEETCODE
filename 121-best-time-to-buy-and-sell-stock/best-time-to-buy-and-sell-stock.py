@@ -1,11 +1,16 @@
 class Solution:
-    def maxProfit(self,prices):
-        n=len(prices)
-        profit=0
-        mini=prices[0]
-        for i in range(n):
-            diff=prices[i]-mini
-            profit=max(profit,diff)
-            mini=min(mini,prices[i])
-
+    def maxProfit(self, prices):
+        profit = 0
+        minp = float('inf')
+        
+        for i in prices:
+            if i < minp:
+                minp = i
+            
+            # Calculate the potential profit if selling at the current price
+            diff = i - minp
+            
+            # Update the maximum profit
+            profit = max(profit, diff)
+        
         return profit
