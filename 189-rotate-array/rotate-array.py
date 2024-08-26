@@ -5,14 +5,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        n = len(nums)
-        k = k % n  # To handle cases where k >= n
-        dp = [0] * n
-
-        # Populate the dp array with rotated values
-        for i in range(n):
-            dp[(i + k) % n] = nums[i]
+        def rev(l: int, r: int) -> None:
+            """
+            Helper function to reverse elements in nums from index l to r.
+            """
+            while l < r:
+                nums[l], nums[r] = nums[r], nums[l]
+                l += 1
+                r -= 1
         
-        # Copy the dp array back to nums
-        for i in range(n):
-            nums[i] = dp[i]
+        n = len(nums)
+        k = k % n  # Handle cases where k >= n
+
+        # Reverse the entire list
+        rev(0, n - 1)
+        # Reverse the first k elements
+        rev(0, k - 1)
+        # Reverse the remaining n - k elements
+        rev(k, n - 1)
