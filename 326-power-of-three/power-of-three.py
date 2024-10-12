@@ -3,7 +3,7 @@ class Solution:
         if n < 0 or n == 0:
             return False
         def po(x):
-            # prod=1
+            prod=1
             prod=pow(3,x)
             if prod == n:
                 return True
